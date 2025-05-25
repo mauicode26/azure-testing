@@ -1,0 +1,23 @@
+{
+  "name": "vehicle-telemetry-api",
+  "version": "1.0.0",
+  "description": "Vehicle telemetry API for GM Financial",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "redis": "^4.6.10",
+    "@azure/event-hubs": "^5.11.4",
+    "dotenv": "^16.3.1",
+    "express-rate-limit": "^7.1.5",
+    "prom-client": "^15.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

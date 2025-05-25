@@ -24,3 +24,13 @@ provider "azurerm" {
 module "k8s" {
   source = "./modules/k8s"
 }
+
+module "azure_services" {
+  source   = "./modules/azure-services"
+  location = var.location
+}
+
+module "monitoring" {
+  source   = "./modules/monitoring"
+  location = var.location
+}

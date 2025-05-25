@@ -1,0 +1,132 @@
+# Loan API Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loan-api
+  labels:
+    app: loan-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: loan-api
+  template:
+    metadata:
+      labels:
+        app: loan-api
+    spec:
+      containers:
+      - name: loan-api
+        image: seanshickeyacr.azurecr.io/loan-api:latest
+        ports:
+        - containerPort: 3001
+        env:
+        - name: PORT
+          value: "3001"
+        - name: REDIS_HOST
+          value: "seanshickey-redis.redis.cache.windows.net"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redis-secret
+              key: password
+        - name: EVENTHUB_CONNECTION_STRING
+          valueFrom:
+            secretKeyRef:
+              name: eventhub-secret
+              key: connection-string
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3001
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3001
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+---
+# Loan API Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: loan-api-service
+spec:
+  selector:
+    app: loan-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3001
+  type: LoadBalancer
+
+---
+# Vehicle Telemetry API Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicle-telemetry-api
+  labels:
+    app: vehicle-telemetry-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vehicle-telemetry-api
+  template:
+    metadata:
+      labels:
+        app: vehicle-telemetry-api
+    spec:
+      containers:
+      - name: vehicle-telemetry-api
+        image: seanshickeyacr.azurecr.io/vehicle-telemetry-api:latest
+        ports:
+        - containerPort: 3002
+        env:
+        - name: PORT
+          value: "3002"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3002
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3002
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+---
+# Vehicle Telemetry API Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: vehicle-telemetry-service
+spec:
+  selector:
+    app: vehicle-telemetry-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3002
+  type: LoadBalancer
