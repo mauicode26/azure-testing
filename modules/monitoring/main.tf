@@ -38,7 +38,7 @@ resource "azurerm_log_analytics_workspace" "monitoring" {
 
 // Application Insights
 resource "azurerm_application_insights" "app_insights" {
-  name                = "gm-financial-app-insights"
+  name                = "${var.customer}-app-insights"
   location            = azurerm_resource_group.monitoring_rg.location
   resource_group_name = azurerm_resource_group.monitoring_rg.name
   workspace_id        = azurerm_log_analytics_workspace.monitoring.id

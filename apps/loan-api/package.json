@@ -1,7 +1,7 @@
 {
   "name": "loan-api",
   "version": "1.0.0",
-  "description": "Loan application processing API for GM Financial",
+  "description": "Loan application processing API for example example",
   "main": "dist/index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",

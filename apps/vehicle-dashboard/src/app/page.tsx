@@ -55,7 +55,7 @@ export default function Dashboard() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            GM Financial Vehicle Telemetry Dashboard
+            example example Vehicle Telemetry Dashboard
           </h1>
           <div className="flex items-center space-x-4">
             <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>

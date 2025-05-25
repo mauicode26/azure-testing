@@ -216,6 +216,6 @@ app.get('/api/stats', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`GM Financial Loan API running on port ${PORT}`);
+  console.log(`example example Loan API running on port ${PORT}`);
   console.log(`Health check: http://localhost:${PORT}/health`);
 });

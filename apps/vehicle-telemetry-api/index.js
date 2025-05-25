@@ -55,7 +55,7 @@ app.use((req, res, next) => {
 // Mock vehicle data generator
 function generateVehicleData() {
   return {
-    vehicleId: `GM${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`,
+    vehicleId: `example${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`,
     timestamp: new Date().toISOString(),
     location: {
       lat: 42.3601 + (Math.random() - 0.5) * 0.1,

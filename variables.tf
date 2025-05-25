@@ -27,3 +27,7 @@ variable "vm_address_prefixes" {
   description = "The address prefixes for the Virtual Machine"
   type        = string
 }
+variable "customer" {
+  description = "Customer name"
+  type        = string
+}
