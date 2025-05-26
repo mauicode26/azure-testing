@@ -31,3 +31,39 @@ variable "customer" {
   description = "Customer name"
   type        = string
 }
+variable "resource_group_name" {
+  description = "Name of the resource group"
+  type        = string
+}
+variable "database_administrator_login_password" {
+  description = "The administrator password for the VM"
+  type        = string
+  sensitive   = true
+}
+variable "database_administrator_login" {
+  description = "The administrator login for the VM"
+  type        = string
+}
+
+# Database variables
+variable "database_name" {
+  description = "The name of the database to create"
+  type        = string
+}
+
+variable "database_server_name" {
+  description = "The name of the MSSQL server"
+  type        = string
+}
+
+variable "database_sku_name" {
+  description = "The SKU name for the database"
+  type        = string
+  default     = "S0"
+}
+
+variable "tags" {
+  description = "A map of tags to assign to the resources"
+  type        = map(string)
+  default     = {}
+}
