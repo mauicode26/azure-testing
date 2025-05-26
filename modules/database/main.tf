@@ -7,7 +7,6 @@ resource "azurerm_mssql_server" "mssql_server" {
     administrator_login_password = var.administrator_login_password
     minimum_tls_version          = var.minimum_tls_version
     public_network_access_enabled = var.public_network_access_enabled
-    
     tags = var.tags
 }
 
@@ -17,7 +16,6 @@ resource "azurerm_mssql_database" "mssql_database" {
     collation           = var.collation
     max_size_gb         = var.max_size_gb
     sku_name            = var.sku_name
-    
     tags = var.tags
 }
 
